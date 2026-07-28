@@ -1,39 +1,223 @@
-"use client";
-import {useEffect,useMemo,useState} from "react";
-type B={id:string;provision:string;annual:number;unit:string};
-type R={id:string;contractYear:number;requestDate:string|null;dueDate:string|null;provision:string;category:string;quantity:number;unit:string;status:string;observations:string};
-type D={generatedAt:string;base:B[];records:R[]};
-const fmt=new Intl.NumberFormat("es-CL",{maximumFractionDigits:1});
-const received=(s:string)=>/ok|recepcionado/i.test(s);
-const baseDocs=[
- {title:"Césped",section:"3.7.3.9",printed:"21–22",pdf:22,image:"cesped.webp"},
- {title:"Árboles y arbustos",section:"3.7.4.5",printed:"24–28",pdf:25,image:"arboles-arbustos.webp"},
- {title:"Florales y semillas",section:"3.7.7.1.5–1.6",printed:"31–34",pdf:32,image:"florales-semillas.webp"},
- {title:"Fertilización",section:"3.7.8.1",printed:"35",pdf:36,image:"fertilizacion.webp"},
- {title:"Riego y PVC",section:"3.8.4.2–4.4",printed:"40–43",pdf:41,image:"riego-pvc.webp"},
- {title:"Áridos",section:"3.9.2",printed:"45–46",pdf:46,image:"aridos.webp"},
+﻿"use client";
+
+import {useEffect, useMemo, useState} from "react";
+
+type BaseProvision = {id: string; provision: string; annual: number; unit: string};
+type RecordItem = {
+  id: string;
+  contractYear: number;
+  requestDate: string | null;
+  dueDate: string | null;
+  provision: string;
+  category: string;
+  quantity: number;
+  unit: string;
+  status: string;
+  observations: string;
+};
+type DashboardData = {generatedAt: string; base: BaseProvision[]; records: RecordItem[]};
+
+const formatNumber = new Intl.NumberFormat("es-CL", {maximumFractionDigits: 1});
+const isReceived = (status: string) => /ok|recepcionado/i.test(status);
+const displayText = (value: string) => value
+  .replaceAll("Cesped", "CÃ©sped")
+  .replaceAll("Arboles", "Ãrboles")
+  .replaceAll("Tuberia", "TuberÃ­a")
+  .replaceAll("Valvula", "VÃ¡lvula")
+  .replaceAll("hormigon", "hormigÃ³n");
+
+const technicalDocs = [
+  {title: "CÃ©sped", section: "3.7.3.9", printed: "21â€“22", pdf: 22, image: "cesped.webp"},
+  {title: "Ãrboles y arbustos", section: "3.7.4.5", printed: "24â€“28", pdf: 25, image: "arboles-arbustos.webp"},
+  {title: "Florales y semillas", section: "3.7.7.1.5â€“1.6", printed: "31â€“34", pdf: 32, image: "florales-semillas.webp"},
+  {title: "FertilizaciÃ³n", section: "3.7.8.1", printed: "35", pdf: 36, image: "fertilizacion.webp"},
+  {title: "Riego y PVC", section: "3.8.4.2â€“4.4", printed: "40â€“43", pdf: 41, image: "riego-pvc.webp"},
+  {title: "Ãridos", section: "3.9.2", printed: "45â€“46", pdf: 46, image: "aridos.webp"},
 ];
-export default function Home(){
- const[data,setData]=useState<D|null>(null),[tab,setTab]=useState<"control"|"bases">("control"),[year,setYear]=useState("2026"),[status,setStatus]=useState("Todos"),[category,setCategory]=useState("Todas"),[query,setQuery]=useState("");
- useEffect(()=>{fetch("/data/provisiones.json").then(r=>r.json()).then(setData)},[]);
- const y=Number(year),categories=useMemo(()=>data?[...new Set(data.base.map(x=>x.provision))]:[],[data]);
- const movements=useMemo(()=>data?.records.filter(r=>String(r.contractYear)===year&&(status==="Todos"||(status==="Recepcionado"?received(r.status):!received(r.status)))&&(category==="Todas"||r.category===category)&&`${r.provision} ${r.observations}`.toLowerCase().includes(query.toLowerCase()))||[],[data,year,status,category,query]);
- const progress=useMemo(()=>data?.base.filter(b=>b.annual>0).map(b=>{const delivered=data.records.filter(r=>r.contractYear===y&&received(r.status)&&r.category===b.provision&&r.unit.toLowerCase()===b.unit.toLowerCase()).reduce((a,r)=>a+r.quantity,0);return{...b,delivered,pct:b.annual?Math.min(delivered/b.annual*100,100):0}}).sort((a,b)=>b.pct-a.pct)||[],[data,y]);
- const inCourse=data?.records.filter(r=>r.contractYear===y&&!received(r.status))||[];
- const complete=progress.filter(p=>p.pct>=100).length,general=progress.length?complete/progress.length*100:0;
- const overdue=inCourse.filter(r=>r.dueDate&&new Date(r.dueDate)<new Date()).length;
- if(!data)return <main className="loading">Preparando provisiones…</main>;
- return <main>
-  <header className="header"><div><p className="kicker">MAIPÚ · ZONA 6</p><h1>Control de provisiones</h1><p className="contract">Según Bases Técnicas Generales de Licitación 2024 del “Servicio de Mantención de Áreas Verdes, Mejoramiento Continuo y Zonas Especiales de la Comuna de Maipú”.</p></div><div className="update"><span>Última actualización</span><strong>{new Date(data.generatedAt).toLocaleDateString("es-CL")}</strong></div></header>
-  <nav className="tabs" aria-label="Secciones"><button className={tab==="control"?"active":""} onClick={()=>setTab("control")}>Control de provisiones</button><button className={tab==="bases"?"active":""} onClick={()=>setTab("bases")}>Ver base técnica</button></nav>
-  {tab==="control"?<>
-   <section className="filters"><label>Año contractual<select value={year} onChange={e=>setYear(e.target.value)}><option>2026</option><option>2025</option></select></label><label>Categoría<select value={category} onChange={e=>setCategory(e.target.value)}><option>Todas</option>{categories.map(c=><option key={c}>{c}</option>)}</select></label><label>Estado<select value={status} onChange={e=>setStatus(e.target.value)}><option>Todos</option><option>Recepcionado</option><option>En curso</option></select></label><label>Buscar provisión<input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Nombre o destino…"/></label></section>
-   <section className="kpis"><article><span>Cumplimiento general</span><strong>{general.toFixed(0)}%</strong><small>{complete} de {progress.length} provisiones completas</small></article><article><span>Pendientes</span><strong>{inCourse.length}</strong><small>Solicitudes todavía abiertas</small></article><article className={overdue?"danger":""}><span>Plazos vencidos</span><strong>{overdue}</strong><small>Sin recepción conforme</small></article></section>
-   <section className="overview"><div className="provisions"><div className="sectionTitle"><div><p className="kicker">AVANCE CONTRACTUAL</p><h2>Todas las provisiones</h2></div><span>{year}</span></div><div className="provisionGrid">{progress.map(p=><article key={p.id}><div className="dot" data-complete={p.pct>=100}/><div><strong>{p.provision}</strong><small>{fmt.format(p.delivered)} / {fmt.format(p.annual)} {p.unit}</small></div><b>{p.pct.toFixed(0)}%</b></article>)}</div></div>
-    <aside className="course"><div className="sectionTitle"><div><p className="kicker">SEGUIMIENTO</p><h2>Provisiones en curso</h2></div><b>{inCourse.length}</b></div>{inCourse.length?inCourse.map(r=><article key={r.id}><strong>{r.provision}</strong><span>{fmt.format(r.quantity)} {r.unit}</span><small>{r.observations||"Sin destino informado"}</small><em>{r.dueDate?`Plazo ${new Date(r.dueDate).toLocaleDateString("es-CL")}`:"Sin fecha de plazo"}</em></article>):<p className="empty">No hay solicitudes abiertas para este año.</p>}</aside>
-   </section>
-   <section className="movements"><div className="sectionTitle"><div><p className="kicker">TRAZABILIDAD</p><h2>Detalle de movimientos</h2></div><span>{movements.length} registros</span></div><div className="tableWrap"><table><thead><tr><th>Provisión</th><th>Cantidad</th><th>Solicitud</th><th>Plazo</th><th>Estado</th><th>Destino / observación</th></tr></thead><tbody>{movements.map(r=><tr key={r.id}><td><strong>{r.provision}</strong><small>{r.id}</small></td><td>{fmt.format(r.quantity)} {r.unit}</td><td>{r.requestDate?new Date(r.requestDate).toLocaleDateString("es-CL"):"—"}</td><td>{r.dueDate?new Date(r.dueDate).toLocaleDateString("es-CL"):"—"}</td><td><span className={received(r.status)?"badge ok":"badge open"}>{r.status}</span></td><td>{r.observations||"—"}</td></tr>)}</tbody></table></div></section>
-  </>:<section className="technical"><div className="technicalIntro"><div><p className="kicker">RESPALDO CONTRACTUAL</p><h2>Base técnica de provisiones</h2><p>Cada cuadro conserva una imagen literal, el numeral y la página impresa. El botón abre el PDF directamente en la página correspondiente.</p></div><a className="pdfButton" href="/base-tecnica/bases-tecnicas-zona-6.pdf" target="_blank" rel="noreferrer">Abrir PDF completo</a></div><div className="docGrid">{baseDocs.map(d=><article key={d.title}><img src={`/base-tecnica/${d.image}`} alt={`Extracto de la base técnica sobre ${d.title}`}/><div><p className="kicker">NUMERAL {d.section}</p><h3>{d.title}</h3><span>Páginas impresas {d.printed}</span><a href={`/base-tecnica/bases-tecnicas-zona-6.pdf#page=${d.pdf}`} target="_blank" rel="noreferrer">Ver página exacta →</a></div></article>)}</div></section>}
-  <footer><span>Fuente operativa: BI - PROVISIONES.xlsx</span><span>Los saldos se descuentan sólo con recepción conforme.</span></footer>
- </main>
+
+function ArrowIcon() {
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>;
 }
+
+function StatusRing({value}: {value: number}) {
+  return <div className="statusRing" style={{"--progress": `${value * 3.6}deg`} as React.CSSProperties}>
+    <div><strong>{value.toFixed(0)}%</strong><span>cumplido</span></div>
+  </div>;
+}
+
+export default function Home() {
+  const [data, setData] = useState<DashboardData | null>(null);
+  const [tab, setTab] = useState<"control" | "bases">("control");
+  const [year, setYear] = useState("2026");
+  const [status, setStatus] = useState("Todos");
+  const [category, setCategory] = useState("Todas");
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    fetch("/data/provisiones.json").then(response => response.json()).then(setData);
+  }, []);
+
+  const numericYear = Number(year);
+  const categories = useMemo(
+    () => data ? [...new Set(data.base.map(item => item.provision))] : [],
+    [data],
+  );
+  const movements = useMemo(
+    () => data?.records.filter(item =>
+      String(item.contractYear) === year &&
+      (status === "Todos" || (status === "Recepcionado" ? isReceived(item.status) : !isReceived(item.status))) &&
+      (category === "Todas" || item.category === category) &&
+      `${item.provision} ${item.observations}`.toLowerCase().includes(query.toLowerCase()),
+    ) || [],
+    [data, year, status, category, query],
+  );
+  const progress = useMemo(
+    () => data?.base.filter(item => item.annual > 0).map(item => {
+      const delivered = data.records
+        .filter(record =>
+          record.contractYear === numericYear &&
+          isReceived(record.status) &&
+          record.category === item.provision &&
+          record.unit.toLowerCase() === item.unit.toLowerCase(),
+        )
+        .reduce((total, record) => total + record.quantity, 0);
+      return {...item, delivered, pct: Math.min(delivered / item.annual * 100, 100)};
+    }).sort((a, b) => b.pct - a.pct) || [],
+    [data, numericYear],
+  );
+
+  const inCourse = data?.records.filter(item => item.contractYear === numericYear && !isReceived(item.status)) || [];
+  const completed = progress.filter(item => item.pct >= 100).length;
+  const started = progress.filter(item => item.pct > 0 && item.pct < 100).length;
+  const general = progress.length ? completed / progress.length * 100 : 0;
+  const overdue = inCourse.filter(item => item.dueDate && new Date(item.dueDate) < new Date()).length;
+  const topProgress = progress.filter(item => item.pct > 0).slice(0, 6);
+
+  if (!data) return <main className="loading">Preparando provisionesâ€¦</main>;
+
+  return <main>
+    <section className="hero">
+      <img src="/contrato/vista-general.jpeg" alt="Vista aÃ©rea de Ã¡reas verdes de MaipÃº Zona 6"/>
+      <div className="heroShade"/>
+      <div className="heroTop">
+        <div className="brandMark"><span>M6</span><div><strong>MaipÃº</strong><small>Zona 6 Â· Ãreas verdes</small></div></div>
+        <div className="freshness"><span className="liveDot"/>Datos actualizados Â· {new Date(data.generatedAt).toLocaleDateString("es-CL")}</div>
+      </div>
+      <div className="heroContent">
+        <p className="eyebrow light">GESTIÃ“N CONTRACTUAL Â· 2024â€“2026</p>
+        <h1>Control de<br/><em>provisiones</em></h1>
+        <p>Seguimiento ejecutivo de solicitudes, entregas y cumplimiento contractual para la mantenciÃ³n de Ã¡reas verdes.</p>
+      </div>
+      <a className="heroPdf" href="/base-tecnica/bases-tecnicas-zona-6.pdf" target="_blank" rel="noreferrer">
+        <span>Consultar respaldo</span>
+        <strong>Ver base tÃ©cnica</strong>
+        <ArrowIcon/>
+      </a>
+    </section>
+
+    <nav className="tabs" aria-label="Secciones">
+      <button className={tab === "control" ? "active" : ""} onClick={() => setTab("control")}>Panel de control</button>
+      <button className={tab === "bases" ? "active" : ""} onClick={() => setTab("bases")}>Base tÃ©cnica</button>
+    </nav>
+
+    {tab === "control" ? <>
+      <section className="toolbar">
+        <div className="toolbarTitle"><span>Vista operativa</span><strong>AÃ±o contractual {year}</strong></div>
+        <label>AÃ±o<select value={year} onChange={event => setYear(event.target.value)}><option>2026</option><option>2025</option></select></label>
+        <label>CategorÃ­a<select value={category} onChange={event => setCategory(event.target.value)}><option>Todas</option>{categories.map(item => <option key={item} value={item}>{displayText(item)}</option>)}</select></label>
+        <label>Estado<select value={status} onChange={event => setStatus(event.target.value)}><option>Todos</option><option>Recepcionado</option><option>En curso</option></select></label>
+        <label className="search">Buscar<input value={query} onChange={event => setQuery(event.target.value)} placeholder="ProvisiÃ³n o destino"/></label>
+      </section>
+
+      <section className="summary">
+        <article className="mainKpi">
+          <div>
+            <p className="eyebrow">ESTADO GENERAL</p>
+            <h2>Cumplimiento<br/>contractual</h2>
+            <p>{completed} provisiones completadas de {progress.length} exigibles durante {year}.</p>
+          </div>
+          <StatusRing value={general}/>
+        </article>
+        <article className="metricCard">
+          <span className="metricIcon green">âœ“</span>
+          <div><small>Completadas</small><strong>{completed}</strong><p>100% entregado</p></div>
+        </article>
+        <article className="metricCard">
+          <span className="metricIcon amber">â†—</span>
+          <div><small>Con avance</small><strong>{started}</strong><p>Entrega parcial</p></div>
+        </article>
+        <article className={`metricCard ${overdue ? "alert" : ""}`}>
+          <span className="metricIcon red">!</span>
+          <div><small>Plazos vencidos</small><strong>{overdue}</strong><p>Requieren gestiÃ³n</p></div>
+        </article>
+      </section>
+
+      <section className="workspace">
+        <article className="progressPanel">
+          <div className="panelHead">
+            <div><p className="eyebrow">AVANCE ACUMULADO</p><h2>Provisiones con movimiento</h2></div>
+            <span>{topProgress.length} activas</span>
+          </div>
+          <div className="progressList">
+            {topProgress.map(item => <div className="progressItem" key={item.id}>
+              <div className="progressCopy">
+                <strong>{displayText(item.provision)}</strong>
+                <span>{formatNumber.format(item.delivered)} de {formatNumber.format(item.annual)} {item.unit}</span>
+              </div>
+              <div className="track"><i style={{width: `${item.pct}%`}}/></div>
+              <b>{item.pct.toFixed(0)}%</b>
+            </div>)}
+            {!topProgress.length && <p className="empty">TodavÃ­a no existen entregas recepcionadas para este aÃ±o.</p>}
+          </div>
+          <details>
+            <summary>Ver las {progress.length} provisiones contractuales</summary>
+            <div className="allProvisions">{progress.map(item => <div key={item.id}><i data-state={item.pct >= 100 ? "done" : item.pct > 0 ? "active" : "idle"}/><span>{displayText(item.provision)}</span><b>{item.pct.toFixed(0)}%</b></div>)}</div>
+          </details>
+        </article>
+
+        <aside className="fieldPanel">
+          <div className="fieldPhoto"><img src="/contrato/area-verde.jpeg" alt="Ãrea verde mantenida en el contrato"/><span>Registro de terreno</span></div>
+          <div className="courseHead"><div><p className="eyebrow">ATENCIÃ“N REQUERIDA</p><h2>Provisiones en curso</h2></div><b>{inCourse.length}</b></div>
+          <div className="courseList">
+            {inCourse.map(item => <article key={item.id}>
+              <span className="courseDot"/>
+              <div><strong>{displayText(item.provision)}</strong><small>{item.observations || "Sin destino informado"}</small></div>
+              <div className="courseAmount"><b>{formatNumber.format(item.quantity)} {item.unit}</b><small>{item.dueDate ? new Date(item.dueDate).toLocaleDateString("es-CL") : "Sin plazo"}</small></div>
+            </article>)}
+            {!inCourse.length && <p className="empty">No hay solicitudes abiertas para este aÃ±o.</p>}
+          </div>
+        </aside>
+      </section>
+
+      <section className="movements">
+        <div className="panelHead">
+          <div><p className="eyebrow">TRAZABILIDAD</p><h2>Detalle de movimientos</h2></div>
+          <span>{movements.length} registros</span>
+        </div>
+        <div className="tableWrap"><table>
+          <thead><tr><th>ProvisiÃ³n</th><th>Cantidad</th><th>Solicitud</th><th>Plazo</th><th>Estado</th><th>Destino / observaciÃ³n</th></tr></thead>
+          <tbody>{movements.map(item => <tr key={item.id}>
+            <td><strong>{displayText(item.provision)}</strong><small>{item.id}</small></td>
+            <td>{formatNumber.format(item.quantity)} {item.unit}</td>
+            <td>{item.requestDate ? new Date(item.requestDate).toLocaleDateString("es-CL") : "â€”"}</td>
+            <td>{item.dueDate ? new Date(item.dueDate).toLocaleDateString("es-CL") : "â€”"}</td>
+            <td><span className={isReceived(item.status) ? "badge ok" : "badge open"}>{item.status}</span></td>
+            <td>{item.observations || "â€”"}</td>
+          </tr>)}</tbody>
+        </table></div>
+      </section>
+    </> : <section className="technical">
+      <div className="technicalHero">
+        <img src="/contrato/parque.jpeg" alt="Vista aÃ©rea de parque incluido en el contrato"/>
+        <div><p className="eyebrow light">RESPALDO CONTRACTUAL</p><h2>La base tÃ©cnica,<br/>sin doble lectura.</h2><p>Consulta el texto original, su numeral y la pÃ¡gina impresa correspondiente a cada familia de provisiones.</p><a href="/base-tecnica/bases-tecnicas-zona-6.pdf" target="_blank" rel="noreferrer">Abrir PDF completo <ArrowIcon/></a></div>
+      </div>
+      <div className="docGrid">{technicalDocs.map(document => <article key={document.title}>
+        <img src={`/base-tecnica/${document.image}`} alt={`Extracto de la base tÃ©cnica sobre ${document.title}`}/>
+        <div><p className="eyebrow">NUMERAL {document.section}</p><h3>{document.title}</h3><span>PÃ¡ginas impresas {document.printed}</span><a href={`/base-tecnica/bases-tecnicas-zona-6.pdf#page=${document.pdf}`} target="_blank" rel="noreferrer">Ver pÃ¡gina exacta <ArrowIcon/></a></div>
+      </article>)}</div>
+    </section>}
+
+    <footer><span>Fuente operativa: BI - PROVISIONES.xlsx</span><span>Vista publicada Â· los datos corresponden a una fotografÃ­a de la Ãºltima actualizaciÃ³n.</span></footer>
+  </main>;
+}
+
