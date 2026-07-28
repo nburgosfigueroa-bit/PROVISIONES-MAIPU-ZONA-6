@@ -1,0 +1,23 @@
+"use client";
+import {useEffect,useMemo,useState} from "react";
+type B={id:string;provision:string;annual:number;unit:string};
+type R={id:string;contractYear:number;requestDate:string|null;dueDate:string|null;provision:string;category:string;quantity:number;unit:string;status:string;observations:string};
+type D={generatedAt:string;base:B[];records:R[]};
+const fmt=new Intl.NumberFormat("es-CL",{maximumFractionDigits:1});
+const cls=(s:string)=>/ok|recepcionado/i.test(s)?"ok":/sin|pendiente/i.test(s)?"late":"wait";
+export default function Home(){
+ const[data,setData]=useState<D|null>(null),[year,setYear]=useState("2026"),[status,setStatus]=useState("Todos"),[query,setQuery]=useState("");
+ useEffect(()=>{fetch("/data/provisiones.json").then(r=>r.json()).then(setData)},[]);
+ const rows=useMemo(()=>data?.records.filter(r=>(year==="Todos"||String(r.contractYear)===year)&&(status==="Todos"||(status==="Recepcionado"?cls(r.status)==="ok":cls(r.status)!=="ok"))&&`${r.provision} ${r.observations}`.toLowerCase().includes(query.toLowerCase()))||[],[data,year,status,query]);
+ const y=Number(year==="Todos"?2026:year),received=rows.filter(r=>cls(r.status)==="ok"),pending=rows.filter(r=>cls(r.status)!=="ok"),overdue=pending.filter(r=>r.dueDate&&new Date(r.dueDate)<new Date());
+ const progress=useMemo(()=>data?.base.map(b=>{const delivered=data.records.filter(r=>r.contractYear===y&&cls(r.status)==="ok"&&r.category===b.provision&&r.unit.toLowerCase()===b.unit.toLowerCase()).reduce((a,r)=>a+r.quantity,0);return{...b,delivered,pct:b.annual?Math.min(delivered/b.annual*100,100):0}}).filter(b=>b.annual>0).sort((a,b)=>b.pct-a.pct)||[],[data,y]);
+ if(!data)return <main className="loading">Preparando provisiones…</main>;
+ return <main>
+  <header className="hero"><div><p className="eyebrow">MAIPÚ · ZONA 6</p><h1>Control de provisiones</h1><p className="subtitle">Seguimiento contractual desde la solicitud hasta la recepción conforme.</p></div><div className="source"><span>Fuente única</span><strong>BI - PROVISIONES.xlsx</strong><small>Actualizado {new Date(data.generatedAt).toLocaleDateString("es-CL")}</small></div></header>
+  <section className="filters"><label>Año contractual<select value={year} onChange={e=>setYear(e.target.value)}><option>2026</option><option>2025</option><option>Todos</option></select></label><label>Estado<select value={status} onChange={e=>setStatus(e.target.value)}><option>Todos</option><option>Recepcionado</option><option>Pendiente</option></select></label><label>Buscar provisión o destino<input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ej. césped, vivero…"/></label></section>
+  <section className="metrics"><article><span>Movimientos</span><strong>{rows.length}</strong><small>Año {year}</small></article><article><span>Recepcionados</span><strong>{received.length}</strong><small>Descuentan saldo</small></article><article><span>Pendientes</span><strong>{pending.length}</strong><small>Requieren seguimiento</small></article><article className={overdue.length?"alert":""}><span>Plazo vencido</span><strong>{overdue.length}</strong><small>Sin recepción conforme</small></article></section>
+  <section className="panel"><div className="panelTitle"><div><p className="eyebrow">CUMPLIMIENTO CONTRACTUAL</p><h2>Avance por provisión · {y}</h2></div><p>Sólo considera registros recepcionados.</p></div><div className="progressList">{progress.map(b=><article className="progressRow" key={b.id}><div className="progressLabel"><strong>{b.provision}</strong><span>{fmt.format(b.delivered)} / {fmt.format(b.annual)} {b.unit}</span></div><div className="track"><span style={{width:`${b.pct}%`}}/></div><b>{b.pct.toFixed(0)}%</b></article>)}</div></section>
+  <section className="panel"><div className="panelTitle"><div><p className="eyebrow">TRAZABILIDAD</p><h2>Solicitudes y entregas</h2></div><p>{rows.length} registros filtrados.</p></div><div className="tableWrap"><table><thead><tr><th>ID</th><th>Provisión</th><th>Cantidad</th><th>Solicitud</th><th>Plazo</th><th>Estado</th><th>Destino / observación</th></tr></thead><tbody>{rows.map(r=><tr key={r.id}><td className="mono">{r.id}</td><td><strong>{r.provision}</strong></td><td>{fmt.format(r.quantity)} {r.unit}</td><td>{r.requestDate?new Date(r.requestDate).toLocaleDateString("es-CL"):"—"}</td><td>{r.dueDate?new Date(r.dueDate).toLocaleDateString("es-CL"):"—"}</td><td><span className={`badge ${cls(r.status)}`}>{r.status}</span></td><td>{r.observations||"—"}</td></tr>)}</tbody></table></div></section>
+  <footer><span>Contrato de Mantención de Áreas Verdes · Zona 6</span><span>Los saldos se calculan con recepción conforme.</span></footer>
+ </main>
+}

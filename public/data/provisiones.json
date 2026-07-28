@@ -1,0 +1,445 @@
+{
+  "generatedAt": "2026-07-28T14:46:23.134499+00:00",
+  "base": [
+    {
+      "id": "BT-001",
+      "provision": "Cesped",
+      "annual": 4000.0,
+      "unit": "m2"
+    },
+    {
+      "id": "BT-002",
+      "provision": "Arboles",
+      "annual": 100.0,
+      "unit": "unidad"
+    },
+    {
+      "id": "BT-003",
+      "provision": "Arbusto",
+      "annual": 560.0,
+      "unit": "unidad"
+    },
+    {
+      "id": "BT-004",
+      "provision": "Florales y Cubresuelos",
+      "annual": 3200.0,
+      "unit": "unidad"
+    },
+    {
+      "id": "BT-005",
+      "provision": "Baby Bloomers",
+      "annual": 1.0,
+      "unit": "kg"
+    },
+    {
+      "id": "BT-006",
+      "provision": "Bloomers",
+      "annual": 0.0,
+      "unit": "kg"
+    },
+    {
+      "id": "BT-007",
+      "provision": "Dedal de Oro MIX",
+      "annual": 1.0,
+      "unit": "kg"
+    },
+    {
+      "id": "BT-008",
+      "provision": "Fertilizante Cesped",
+      "annual": 4.0,
+      "unit": "sacos"
+    },
+    {
+      "id": "BT-009",
+      "provision": "Fertilizante Cubresuelos",
+      "annual": 3000.0,
+      "unit": "m2"
+    },
+    {
+      "id": "BT-010",
+      "provision": "Fertilizante Arboles",
+      "annual": 300.0,
+      "unit": "arboles"
+    },
+    {
+      "id": "BT-011",
+      "provision": "Kit de riego por goteo",
+      "annual": 3000.0,
+      "unit": "m2"
+    },
+    {
+      "id": "BT-012",
+      "provision": "Malla Antimaleza",
+      "annual": 3000.0,
+      "unit": "m2"
+    },
+    {
+      "id": "BT-013",
+      "provision": "Tuberia PVC C10 50 mm",
+      "annual": 80.0,
+      "unit": "tiras"
+    },
+    {
+      "id": "BT-014",
+      "provision": "Tuberia PVC C10 40 mm",
+      "annual": 80.0,
+      "unit": "tiras"
+    },
+    {
+      "id": "BT-015",
+      "provision": "Tuberia PVC C10 32 mm",
+      "annual": 80.0,
+      "unit": "tiras"
+    },
+    {
+      "id": "BT-016",
+      "provision": "Valvula de acople rapido VAC",
+      "annual": 10.0,
+      "unit": "unidad"
+    },
+    {
+      "id": "BT-017",
+      "provision": "Llave de corte",
+      "annual": 10.0,
+      "unit": "unidad"
+    },
+    {
+      "id": "BT-018",
+      "provision": "Fitting General",
+      "annual": 1.0,
+      "unit": "Gl"
+    },
+    {
+      "id": "BT-019",
+      "provision": "Maicillo color amarillo",
+      "annual": 160.0,
+      "unit": "m3"
+    },
+    {
+      "id": "BT-020",
+      "provision": "Arena gruesa fina",
+      "annual": 16.0,
+      "unit": "m3"
+    },
+    {
+      "id": "BT-021",
+      "provision": "Arena de playa",
+      "annual": 8.0,
+      "unit": "m3"
+    },
+    {
+      "id": "BT-022",
+      "provision": "Gravilla",
+      "annual": 16.0,
+      "unit": "m3"
+    },
+    {
+      "id": "BT-023",
+      "provision": "Gravilla canto rodado de tamaño 1 a 3 cm",
+      "annual": 8.0,
+      "unit": "m3"
+    },
+    {
+      "id": "BT-024",
+      "provision": "Gravilla colores (amarillo, negra, blanca) tamaño almendra de 2 a 3 cm",
+      "annual": 8.0,
+      "unit": "m3"
+    },
+    {
+      "id": "BT-025",
+      "provision": "Ladrillo Molido o Chancado",
+      "annual": 8.0,
+      "unit": "m3"
+    },
+    {
+      "id": "BT-026",
+      "provision": "Mulch de colores",
+      "annual": 8.0,
+      "unit": "m3"
+    },
+    {
+      "id": "BT-027",
+      "provision": "Bloque de hormigon",
+      "annual": 160.0,
+      "unit": "unidad"
+    },
+    {
+      "id": "BT-028",
+      "provision": "Solerilla",
+      "annual": 200.0,
+      "unit": "unidad"
+    },
+    {
+      "id": "BT-029",
+      "provision": "Cemento",
+      "annual": 80.0,
+      "unit": "sacos"
+    }
+  ],
+  "records": [
+    {
+      "id": "PROV-0001",
+      "contractYear": 2025,
+      "requestDate": "2025-03-21T00:00:00",
+      "dueDate": "2025-03-21T00:00:00",
+      "provision": "Solerilla",
+      "category": "Solerilla",
+      "quantity": 15.0,
+      "unit": "unidad",
+      "status": "OK - Recepcionado",
+      "observations": "para plaza Bosques del sur codigo 3-322"
+    },
+    {
+      "id": "PROV-0002",
+      "contractYear": 2025,
+      "requestDate": "2025-03-27T00:00:00",
+      "dueDate": "2025-04-11T00:00:00",
+      "provision": "Gravilla",
+      "category": "Gravilla",
+      "quantity": 10.0,
+      "unit": "m3",
+      "status": "OK - Recepcionado",
+      "observations": "para entregar a Vivero Municipal"
+    },
+    {
+      "id": "PROV-0003",
+      "contractYear": 2025,
+      "requestDate": "2025-03-27T00:00:00",
+      "dueDate": "2025-04-11T00:00:00",
+      "provision": "Arena gruesa fina",
+      "category": "Arena gruesa fina",
+      "quantity": 10.0,
+      "unit": "m3",
+      "status": "OK - Recepcionado",
+      "observations": "para entregar a Vivero Municipal"
+    },
+    {
+      "id": "PROV-0004",
+      "contractYear": 2025,
+      "requestDate": "2025-03-27T00:00:00",
+      "dueDate": "2025-04-11T00:00:00",
+      "provision": "Solerilla",
+      "category": "Solerilla",
+      "quantity": 100.0,
+      "unit": "unidad",
+      "status": "OK - Recepcionado",
+      "observations": "para entregar a Vivero Municipal"
+    },
+    {
+      "id": "PROV-0005",
+      "contractYear": 2025,
+      "requestDate": "2025-06-11T00:00:00",
+      "dueDate": "2025-06-27T00:00:00",
+      "provision": "Arboles",
+      "category": "Arboles",
+      "quantity": 100.0,
+      "unit": "unidad",
+      "status": "OK - Recepcionado",
+      "observations": "para entregar a Vivero Municipal"
+    },
+    {
+      "id": "PROV-0006",
+      "contractYear": 2025,
+      "requestDate": "2025-06-18T00:00:00",
+      "dueDate": "2025-07-10T00:00:00",
+      "provision": "Florales y Cubresuelos",
+      "category": "Florales y Cubresuelos",
+      "quantity": 1000.0,
+      "unit": "unidad",
+      "status": "OK - Recepcionado",
+      "observations": "BULBINES - para entregar a Vivero Municipal"
+    },
+    {
+      "id": "PROV-0007",
+      "contractYear": 2025,
+      "requestDate": "2025-06-19T00:00:00",
+      "dueDate": "2025-07-10T00:00:00",
+      "provision": "Gravilla",
+      "category": "Gravilla",
+      "quantity": 8.0,
+      "unit": "m3",
+      "status": "OK - Recepcionado",
+      "observations": "para entregar a Vivero Municipal"
+    },
+    {
+      "id": "PROV-0008",
+      "contractYear": 2025,
+      "requestDate": "2025-07-02T00:00:00",
+      "dueDate": "2025-07-17T00:00:00",
+      "provision": "Solerilla",
+      "category": "Solerilla",
+      "quantity": 85.0,
+      "unit": "unidad",
+      "status": "OK - Recepcionado",
+      "observations": "para plaza La Galaxia con San José 6-074"
+    },
+    {
+      "id": "PROV-0009",
+      "contractYear": 2025,
+      "requestDate": "2025-08-01T00:00:00",
+      "dueDate": "2025-08-18T00:00:00",
+      "provision": "Bloque de hormigon",
+      "category": "Bloque de hormigon",
+      "quantity": 160.0,
+      "unit": "unidad",
+      "status": "OK - Recepcionado",
+      "observations": "para entregar a Vivero Municipal"
+    },
+    {
+      "id": "PROV-0010",
+      "contractYear": 2025,
+      "requestDate": "2025-08-18T00:00:00",
+      "dueDate": "2025-09-05T00:00:00",
+      "provision": "Solerilla",
+      "category": "Solerilla",
+      "quantity": 100.0,
+      "unit": "unidad",
+      "status": "OK - Recepcionado",
+      "observations": "para entregar a Vivero Municipal"
+    },
+    {
+      "id": "PROV-0011",
+      "contractYear": 2025,
+      "requestDate": "2025-08-28T00:00:00",
+      "dueDate": "2025-08-30T00:00:00",
+      "provision": "Solerilla",
+      "category": "Solerilla",
+      "quantity": 30.0,
+      "unit": "unidad",
+      "status": "OK - Recepcionado",
+      "observations": "para La Galaxia con Av. Sur mejoramiento"
+    },
+    {
+      "id": "PROV-0012",
+      "contractYear": 2025,
+      "requestDate": "2025-09-22T00:00:00",
+      "dueDate": "2025-10-08T00:00:00",
+      "provision": "Cesped",
+      "category": "Cesped",
+      "quantity": 80.0,
+      "unit": "m2",
+      "status": "OK - Recepcionado",
+      "observations": "para entregar en Plaza El Conquistador Codigo 6-089"
+    },
+    {
+      "id": "PROV-0013",
+      "contractYear": 2025,
+      "requestDate": "2025-09-24T00:00:00",
+      "dueDate": "2025-10-14T00:00:00",
+      "provision": "Arbusto",
+      "category": "Arbusto",
+      "quantity": 280.0,
+      "unit": "unidad",
+      "status": "OK - Recepcionado",
+      "observations": "para entregar a Vivero Municipal"
+    },
+    {
+      "id": "PROV-0014",
+      "contractYear": 2025,
+      "requestDate": "2025-10-03T00:00:00",
+      "dueDate": "2025-10-20T00:00:00",
+      "provision": "Ladrillo Molido o Chancado",
+      "category": "Ladrillo Molido o Chancado",
+      "quantity": 8.0,
+      "unit": "m3",
+      "status": "OK - Recepcionado",
+      "observations": "para entregar a Vivero Municipal"
+    },
+    {
+      "id": "PROV-0015",
+      "contractYear": 2025,
+      "requestDate": "2026-03-09T00:00:00",
+      "dueDate": "2026-03-31T00:00:00",
+      "provision": "Florales y Cubresuelos",
+      "category": "Florales y Cubresuelos",
+      "quantity": 2200.0,
+      "unit": "unidad",
+      "status": "OK - Recepcionado",
+      "observations": "Entrega vivero Municipal"
+    },
+    {
+      "id": "PROV-0016",
+      "contractYear": 2026,
+      "requestDate": "2026-02-20T00:00:00",
+      "dueDate": "2026-03-04T00:00:00",
+      "provision": "Cesped",
+      "category": "Cesped",
+      "quantity": 800.0,
+      "unit": "m2",
+      "status": "OK - Recepcionado",
+      "observations": "entrega 6-089 El Conquistador"
+    },
+    {
+      "id": "PROV-0017",
+      "contractYear": 2026,
+      "requestDate": "2026-03-09T00:00:00",
+      "dueDate": "2026-03-31T00:00:00",
+      "provision": "Cemento",
+      "category": "Cemento",
+      "quantity": 80.0,
+      "unit": "sacos",
+      "status": "OK - Recepcionado",
+      "observations": "entrega Bodega Faoga"
+    },
+    {
+      "id": "PROV-0018",
+      "contractYear": 2026,
+      "requestDate": "2026-03-09T00:00:00",
+      "dueDate": "2026-03-31T00:00:00",
+      "provision": "Maicillo color amarillo",
+      "category": "Maicillo color amarillo",
+      "quantity": 100.0,
+      "unit": "m3",
+      "status": "OK - Recepcionado",
+      "observations": "Entrega vivero Municipal"
+    },
+    {
+      "id": "PROV-0019",
+      "contractYear": 2026,
+      "requestDate": "2026-03-09T00:00:00",
+      "dueDate": "2026-03-31T00:00:00",
+      "provision": "Florales y Cubresuelos",
+      "category": "Florales y Cubresuelos",
+      "quantity": 1800.0,
+      "unit": "unidad",
+      "status": "OK - Recepcionado",
+      "observations": "Entrega vivero Municipal"
+    },
+    {
+      "id": "PROV-0020",
+      "contractYear": 2026,
+      "requestDate": null,
+      "dueDate": "2026-04-30T00:00:00",
+      "provision": "Gravilla colores (amarillo, negra, blanca) tamaño almendra de 2 a 3 cm",
+      "category": "Gravilla colores (amarillo, negra, blanca) tamaño almendra de 2 a 3 cm",
+      "quantity": 8.0,
+      "unit": "m3",
+      "status": "OK - Recepcionado",
+      "observations": "Entrega nudo Melipilla (amarillo)"
+    },
+    {
+      "id": "PROV-0021",
+      "contractYear": 2026,
+      "requestDate": null,
+      "dueDate": null,
+      "provision": "Arena gruesa fina",
+      "category": "Arena gruesa fina",
+      "quantity": 14.0,
+      "unit": "m3",
+      "status": "sin recepcion",
+      "observations": "Por Entegar"
+    },
+    {
+      "id": "PROV-0022",
+      "contractYear": 2026,
+      "requestDate": "2026-04-28T00:00:00",
+      "dueDate": "2026-05-18T00:00:00",
+      "provision": "Maicillo color amarillo",
+      "category": "Maicillo color amarillo",
+      "quantity": 60.0,
+      "unit": "m3",
+      "status": "sin recepcion",
+      "observations": "Por Entregar"
+    }
+  ]
+}
