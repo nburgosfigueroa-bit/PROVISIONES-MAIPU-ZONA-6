@@ -3,6 +3,24 @@ import fs from "node:fs";
 const event = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, "utf8"));
 const payload = event.client_payload ?? {};
 const rows = (value) => Array.isArray(value) ? value : Array.isArray(value?.value) ? value.value : [];
+const baseRow = (row) => Array.isArray(row) ? {
+  ID_BT: row[0],
+  Provision: row[1],
+  Cantidad_Anual_Zona_6: row[2],
+  Unidad_Base: row[3],
+} : row;
+const recordRow = (row) => Array.isArray(row) ? {
+  ID_Registro: row[0],
+  Anio: row[1],
+  Fecha_Solicitud: row[2],
+  Plazo_Entrega: row[3],
+  Provision: row[4],
+  Categoria_BT: row[5],
+  Cantidad_Solicitada: row[6],
+  Unidad: row[7],
+  Estado: row[8],
+  Observaciones: row[9],
+} : row;
 const number = (value) => { const parsed = Number(String(value ?? "").replace(",", ".")); return Number.isFinite(parsed) ? parsed : 0; };
 const isoDate = (value) => {
   if (value === null || value === undefined || value === "") return null;
@@ -13,7 +31,7 @@ const isoDate = (value) => {
   return Number.isNaN(parsed.valueOf()) ? null : parsed.toISOString().slice(0, 10);
 };
 
-const base = rows(payload.base).filter((row) => row.ID_BT && row.Provision).map((row) => ({
+const base = rows(payload.base).map(baseRow).filter((row) => row.ID_BT && row.Provision).map((row) => ({
   id: String(row.ID_BT),
   provision: String(row.Provision).trim(),
   annual: number(row.Cantidad_Anual_Zona_6),
@@ -21,6 +39,7 @@ const base = rows(payload.base).filter((row) => row.ID_BT && row.Provision).map(
 }));
 
 const records = rows(payload.records)
+  .map(recordRow)
   .filter((row) => row.ID_Registro && row.Provision && [2025, 2026].includes(number(row.Anio)))
   .map((row) => ({
     id: String(row.ID_Registro),
