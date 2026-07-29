@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-28T17:03:32.981558+00:00",
+  "generatedAt": "2026-07-29T16:52:46.523856+00:00",
   "base": [
     {
       "id": "BT-001",
@@ -400,7 +400,7 @@
       "dueDate": "2026-03-31T00:00:00",
       "provision": "Florales y Cubresuelos",
       "category": "Florales y Cubresuelos",
-      "quantity": 1800.0,
+      "quantity": 4000.0,
       "unit": "unidad",
       "status": "OK - Recepcionado",
       "observations": "Entrega vivero Municipal"
@@ -408,7 +408,7 @@
     {
       "id": "PROV-0020",
       "contractYear": 2026,
-      "requestDate": null,
+      "requestDate": "2026-04-15T00:00:00",
       "dueDate": "2026-04-30T00:00:00",
       "provision": "Gravilla colores (amarillo, negra, blanca) tamaño almendra de 2 a 3 cm",
       "category": "Gravilla colores (amarillo, negra, blanca) tamaño almendra de 2 a 3 cm",
@@ -420,14 +420,14 @@
     {
       "id": "PROV-0021",
       "contractYear": 2026,
-      "requestDate": null,
-      "dueDate": null,
+      "requestDate": "2026-04-28T00:00:00",
+      "dueDate": "2026-05-18T00:00:00",
       "provision": "Arena gruesa fina",
       "category": "Arena gruesa fina",
       "quantity": 14.0,
       "unit": "m3",
-      "status": "sin recepcion",
-      "observations": "Por Entegar"
+      "status": "OK - Recepcionado",
+      "observations": "Entrega vivero Municipal"
     },
     {
       "id": "PROV-0022",
@@ -438,8 +438,56 @@
       "category": "Maicillo color amarillo",
       "quantity": 60.0,
       "unit": "m3",
-      "status": "sin recepcion",
-      "observations": "Por Entregar"
+      "status": "OK - Recepcionado",
+      "observations": "Plazas 6-258 A y B"
+    },
+    {
+      "id": "PROV-0023",
+      "contractYear": 2026,
+      "requestDate": "2026-05-20T00:00:00",
+      "dueDate": "2026-05-29T00:00:00",
+      "provision": "Cemento",
+      "category": "Cemento",
+      "quantity": 80.0,
+      "unit": "unidad",
+      "status": "OK - Recepcionado",
+      "observations": "Para entrega en Daoga"
+    },
+    {
+      "id": "PROV-0024",
+      "contractYear": 2026,
+      "requestDate": "2026-05-27T00:00:00",
+      "dueDate": "2026-06-03T00:00:00",
+      "provision": "Solerilla",
+      "category": "Solerilla",
+      "quantity": 70.0,
+      "unit": "unidad",
+      "status": "OK - Recepcionado",
+      "observations": "Entrega vivero Municipal"
+    },
+    {
+      "id": "PROV-0025",
+      "contractYear": 2026,
+      "requestDate": "2026-07-21T00:00:00",
+      "dueDate": "2026-08-14T00:00:00",
+      "provision": "Maicillo color amarillo",
+      "category": "Maicillo color amarillo",
+      "quantity": 60.0,
+      "unit": "m3",
+      "status": "Pendiente",
+      "observations": "Entrega vivero Municipal"
+    },
+    {
+      "id": "PROV-0026",
+      "contractYear": 2026,
+      "requestDate": "2026-07-21T00:00:00",
+      "dueDate": "2026-08-14T00:00:00",
+      "provision": "Arbusto",
+      "category": "Arbusto",
+      "quantity": 280.0,
+      "unit": "unidad",
+      "status": "Pendiente",
+      "observations": "Entrega vivero Municipal"
     }
   ]
 }
