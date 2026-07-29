@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-29T19:25:05.152Z",
+  "generatedAt": "2026-07-29T19:43:17.458Z",
   "base": [
     {
       "id": "BT-001",
@@ -484,7 +484,7 @@
       "dueDate": "2026-08-14",
       "provision": "Arbusto",
       "category": "Arbusto",
-      "quantity": 280,
+      "quantity": 5000,
       "unit": "unidad",
       "status": "Pendiente",
       "observations": "Entrega vivero Municipal"
