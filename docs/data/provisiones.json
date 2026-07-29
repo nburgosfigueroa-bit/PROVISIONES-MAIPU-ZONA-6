@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-29T19:18:40.250Z",
+  "generatedAt": "2026-07-29T19:25:05.152Z",
   "base": [
     {
       "id": "BT-001",
@@ -472,7 +472,7 @@
       "dueDate": "2026-08-14",
       "provision": "Maicillo color amarillo",
       "category": "Maicillo color amarillo",
-      "quantity": 1111111,
+      "quantity": 60,
       "unit": "m3",
       "status": "Pendiente",
       "observations": "Entrega vivero Municipal"
