@@ -6,6 +6,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: actualizar-provisiones
@@ -13,6 +15,9 @@ concurrency:
 
 jobs:
   actualizar:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Descargar repositorio
@@ -30,3 +35,14 @@ jobs:
             git commit -m "Actualizar provisiones desde Excel"
             git push
           fi
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Cargar sitio estático
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs
+      - name: Publicar dashboard
+        id: deployment
+        uses: actions/deploy-pages@v4
