@@ -187,7 +187,10 @@
       "quantity": 15,
       "unit": "unidad",
       "status": "OK - Recepcionado",
-      "observations": "para plaza Bosques del sur codigo 3-322"
+      "observations": "para plaza Bosques del sur codigo 3-322",
+      "manifoldMonth": "Marzo",
+      "bookSheet": "30",
+      "serviceOrder": "N° 11"
     },
     {
       "id": "PROV-0002",
@@ -199,7 +202,10 @@
       "quantity": 10,
       "unit": "m3",
       "status": "OK - Recepcionado",
-      "observations": "para entregar a Vivero Municipal"
+      "observations": "para entregar a Vivero Municipal",
+      "manifoldMonth": "Marzo",
+      "bookSheet": "40",
+      "serviceOrder": "N° 16"
     },
     {
       "id": "PROV-0003",
@@ -211,7 +217,10 @@
       "quantity": 10,
       "unit": "m3",
       "status": "OK - Recepcionado",
-      "observations": "para entregar a Vivero Municipal"
+      "observations": "para entregar a Vivero Municipal",
+      "manifoldMonth": "Marzo",
+      "bookSheet": "40",
+      "serviceOrder": "N° 16"
     },
     {
       "id": "PROV-0004",
@@ -223,7 +232,10 @@
       "quantity": 100,
       "unit": "unidad",
       "status": "OK - Recepcionado",
-      "observations": "para entregar a Vivero Municipal"
+      "observations": "para entregar a Vivero Municipal",
+      "manifoldMonth": "Marzo",
+      "bookSheet": "40",
+      "serviceOrder": "N° 16"
     },
     {
       "id": "PROV-0005",
@@ -235,7 +247,10 @@
       "quantity": 100,
       "unit": "unidad",
       "status": "OK - Recepcionado",
-      "observations": "para entregar a Vivero Municipal"
+      "observations": "para entregar a Vivero Municipal",
+      "manifoldMonth": "Junio",
+      "bookSheet": "16",
+      "serviceOrder": "N° 4"
     },
     {
       "id": "PROV-0006",
@@ -247,7 +262,10 @@
       "quantity": 1000,
       "unit": "unidad",
       "status": "OK - Recepcionado",
-      "observations": "BULBINES - para entregar a Vivero Municipal"
+      "observations": "BULBINES - para entregar a Vivero Municipal",
+      "manifoldMonth": "Junio",
+      "bookSheet": "25",
+      "serviceOrder": "N° 7"
     },
     {
       "id": "PROV-0007",
@@ -259,7 +277,10 @@
       "quantity": 8,
       "unit": "m3",
       "status": "OK - Recepcionado",
-      "observations": "para entregar a Vivero Municipal"
+      "observations": "para entregar a Vivero Municipal",
+      "manifoldMonth": "Junio",
+      "bookSheet": "26",
+      "serviceOrder": "N°8"
     },
     {
       "id": "PROV-0008",
@@ -271,7 +292,10 @@
       "quantity": 85,
       "unit": "unidad",
       "status": "OK - Recepcionado",
-      "observations": "para plaza La Galaxia con San José 6-074"
+      "observations": "para plaza La Galaxia con San José 6-074",
+      "manifoldMonth": "Julio",
+      "bookSheet": "2",
+      "serviceOrder": "N°1"
     },
     {
       "id": "PROV-0009",
@@ -283,7 +307,10 @@
       "quantity": 160,
       "unit": "unidad",
       "status": "OK - Recepcionado",
-      "observations": "para entregar a Vivero Municipal"
+      "observations": "para entregar a Vivero Municipal",
+      "manifoldMonth": "Agosto",
+      "bookSheet": "2",
+      "serviceOrder": "N° 1"
     },
     {
       "id": "PROV-0010",
@@ -295,7 +322,10 @@
       "quantity": 100,
       "unit": "unidad",
       "status": "OK - Recepcionado",
-      "observations": "para entregar a Vivero Municipal"
+      "observations": "para entregar a Vivero Municipal",
+      "manifoldMonth": "Agosto",
+      "bookSheet": "17",
+      "serviceOrder": "N° 7"
     },
     {
       "id": "PROV-0011",
@@ -307,7 +337,10 @@
       "quantity": 30,
       "unit": "unidad",
       "status": "OK - Recepcionado",
-      "observations": "para La Galaxia con Av. Sur mejoramiento"
+      "observations": "para La Galaxia con Av. Sur mejoramiento",
+      "manifoldMonth": "Agosto",
+      "bookSheet": "32",
+      "serviceOrder": "N° 10"
     },
     {
       "id": "PROV-0012",
@@ -319,7 +352,10 @@
       "quantity": 80,
       "unit": "m2",
       "status": "OK - Recepcionado",
-      "observations": "para entregar en Plaza El Conquistador Codigo 6-089"
+      "observations": "para entregar en Plaza El Conquistador Codigo 6-089",
+      "manifoldMonth": "Septiembre",
+      "bookSheet": "17",
+      "serviceOrder": "N° 5"
     },
     {
       "id": "PROV-0013",
@@ -331,7 +367,10 @@
       "quantity": 280,
       "unit": "unidad",
       "status": "OK - Recepcionado",
-      "observations": "para entregar a Vivero Municipal"
+      "observations": "para entregar a Vivero Municipal",
+      "manifoldMonth": "Septiembre",
+      "bookSheet": "18",
+      "serviceOrder": "N°6"
     },
     {
       "id": "PROV-0014",
@@ -343,7 +382,10 @@
       "quantity": 8,
       "unit": "m3",
       "status": "OK - Recepcionado",
-      "observations": "para entregar a Vivero Municipal"
+      "observations": "para entregar a Vivero Municipal",
+      "manifoldMonth": "Octubre",
+      "bookSheet": "8",
+      "serviceOrder": "N°4"
     },
     {
       "id": "PROV-0015",
@@ -355,7 +397,10 @@
       "quantity": 2200,
       "unit": "unidad",
       "status": "OK - Recepcionado",
-      "observations": "Entrega vivero Municipal"
+      "observations": "Entrega vivero Municipal",
+      "manifoldMonth": "Marzo",
+      "bookSheet": "7",
+      "serviceOrder": "3"
     },
     {
       "id": "PROV-0016",
@@ -367,7 +412,10 @@
       "quantity": 800,
       "unit": "m2",
       "status": "OK - Recepcionado",
-      "observations": "entrega 6-089 El Conquistador"
+      "observations": "entrega 6-089 El Conquistador",
+      "manifoldMonth": "Febrero",
+      "bookSheet": "9",
+      "serviceOrder": "1"
     },
     {
       "id": "PROV-0017",
@@ -379,7 +427,10 @@
       "quantity": 80,
       "unit": "sacos",
       "status": "OK - Recepcionado",
-      "observations": "entrega Bodega Daoga"
+      "observations": "entrega Bodega Daoga",
+      "manifoldMonth": "Marzo",
+      "bookSheet": "5",
+      "serviceOrder": "1"
     },
     {
       "id": "PROV-0018",
@@ -391,7 +442,10 @@
       "quantity": 100,
       "unit": "m3",
       "status": "OK - Recepcionado",
-      "observations": "Entrega vivero Municipal"
+      "observations": "Entrega vivero Municipal",
+      "manifoldMonth": "Marzo",
+      "bookSheet": "6",
+      "serviceOrder": "2"
     },
     {
       "id": "PROV-0019",
@@ -403,7 +457,10 @@
       "quantity": 4000,
       "unit": "unidad",
       "status": "OK - Recepcionado",
-      "observations": "Entrega vivero Municipal"
+      "observations": "Entrega vivero Municipal",
+      "manifoldMonth": "Marzo",
+      "bookSheet": "7",
+      "serviceOrder": "3"
     },
     {
       "id": "PROV-0020",
@@ -415,7 +472,10 @@
       "quantity": 8,
       "unit": "m3",
       "status": "OK - Recepcionado",
-      "observations": "Entrega nudo Melipilla (amarillo)"
+      "observations": "Entrega nudo Melipilla (amarillo)",
+      "manifoldMonth": "Abril",
+      "bookSheet": "9",
+      "serviceOrder": "1"
     },
     {
       "id": "PROV-0021",
@@ -427,7 +487,10 @@
       "quantity": 14,
       "unit": "m3",
       "status": "OK - Recepcionado",
-      "observations": "Entrega vivero Municipal"
+      "observations": "Entrega vivero Municipal",
+      "manifoldMonth": "Abril",
+      "bookSheet": "16",
+      "serviceOrder": "2"
     },
     {
       "id": "PROV-0022",
@@ -439,7 +502,10 @@
       "quantity": 60,
       "unit": "m3",
       "status": "OK - Recepcionado",
-      "observations": "Plazas 6-258 A y B"
+      "observations": "Plazas 6-258 A y B",
+      "manifoldMonth": "Abril",
+      "bookSheet": "17",
+      "serviceOrder": "3"
     },
     {
       "id": "PROV-0023",
@@ -451,7 +517,10 @@
       "quantity": 80,
       "unit": "unidad",
       "status": "OK - Recepcionado",
-      "observations": "Para entrega en Daoga"
+      "observations": "Para entrega en Daoga",
+      "manifoldMonth": "Mayo",
+      "bookSheet": "14",
+      "serviceOrder": "3"
     },
     {
       "id": "PROV-0024",
@@ -463,7 +532,10 @@
       "quantity": 70,
       "unit": "unidad",
       "status": "OK - Recepcionado",
-      "observations": "Entrega vivero Municipal"
+      "observations": "Entrega vivero Municipal",
+      "manifoldMonth": "Junio",
+      "bookSheet": "21",
+      "serviceOrder": "4"
     },
     {
       "id": "PROV-0025",
@@ -475,7 +547,10 @@
       "quantity": 60,
       "unit": "m3",
       "status": "Pendiente",
-      "observations": "Entrega vivero Municipal"
+      "observations": "Entrega vivero Municipal",
+      "manifoldMonth": "Julio",
+      "bookSheet": "13",
+      "serviceOrder": "5"
     },
     {
       "id": "PROV-0026",
@@ -487,7 +562,10 @@
       "quantity": 280,
       "unit": "unidad",
       "status": "Pendiente",
-      "observations": "Entrega vivero Municipal"
+      "observations": "Entrega vivero Municipal",
+      "manifoldMonth": "Julio",
+      "bookSheet": "12",
+      "serviceOrder": "4"
     }
   ]
 }
