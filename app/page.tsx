@@ -19,6 +19,20 @@ type DashboardData = {generatedAt: string; base: BaseProvision[]; records: Recor
 
 const formatNumber = new Intl.NumberFormat("es-CL", {maximumFractionDigits: 1});
 const isReceived = (status: string) => /ok|recepcionado/i.test(status);
+const daysUntil = (dueDate: string | null) => {
+  if (!dueDate) return null;
+  const [year, month, day] = dueDate.slice(0, 10).split("-").map(Number);
+  const today = new Date();
+  const todayUtc = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+  return Math.ceil((Date.UTC(year, month - 1, day) - todayUtc) / 86400000);
+};
+const urgency = (days: number | null) => {
+  if (days === null) return {className: "noDate", label: "Sin fecha informada"};
+  if (days < 0) return {className: "late", label: `${Math.abs(days)} ${Math.abs(days) === 1 ? "día de atraso" : "días de atraso"}`};
+  if (days === 0) return {className: "late", label: "Vence hoy"};
+  if (days <= 7) return {className: "soon", label: `${days} ${days === 1 ? "día restante" : "días restantes"}`};
+  return {className: "onTime", label: `${days} días restantes`};
+};
 const displayText = (value: string) => value
   .replaceAll("Cesped", "Césped")
   .replaceAll("Arboles", "Árboles")
@@ -54,7 +68,14 @@ export default function Home() {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    fetch("/data/provisiones.json").then(response => response.json()).then(setData);
+    const liveData = `https://raw.githubusercontent.com/nburgosfigueroa-bit/PROVISIONES-MAIPU-ZONA-6/main/docs/data/provisiones.json?t=${Date.now()}`;
+    fetch(liveData, {cache: "no-store"})
+      .then(response => {
+        if (!response.ok) throw new Error("No fue posible obtener la actualización");
+        return response.json();
+      })
+      .catch(() => fetch("/data/provisiones.json").then(response => response.json()))
+      .then(setData);
   }, []);
 
   const numericYear = Number(year);
@@ -86,11 +107,11 @@ export default function Home() {
     [data, numericYear],
   );
 
-  const inCourse = data?.records.filter(item => item.contractYear === numericYear && !isReceived(item.status)) || [];
+  const inCourse = (data?.records.filter(item => item.contractYear === numericYear && !isReceived(item.status)) || [])
+    .map(item => ({...item, days: daysUntil(item.dueDate)}))
+    .sort((a, b) => (a.days ?? Number.POSITIVE_INFINITY) - (b.days ?? Number.POSITIVE_INFINITY));
   const completed = progress.filter(item => item.pct >= 100).length;
-  const started = progress.filter(item => item.pct > 0 && item.pct < 100).length;
   const general = progress.length ? completed / progress.length * 100 : 0;
-  const overdue = inCourse.filter(item => item.dueDate && new Date(item.dueDate) < new Date()).length;
   const topProgress = progress.filter(item => item.pct > 0).slice(0, 6);
 
   if (!data) return <main className="loading">Preparando provisiones…</main>;
@@ -138,19 +159,28 @@ export default function Home() {
           </div>
           <StatusRing value={general}/>
         </article>
-        <article className="metricCard">
-          <span className="metricIcon green">✓</span>
-          <div><small>Completadas</small><strong>{completed}</strong><p>100% entregado</p></div>
-        </article>
-        <article className="metricCard">
-          <span className="metricIcon amber">↗</span>
-          <div><small>Con avance</small><strong>{started}</strong><p>Entrega parcial</p></div>
-        </article>
-        <article className={`metricCard ${overdue ? "alert" : ""}`}>
-          <span className="metricIcon red">!</span>
-          <div><small>Plazos vencidos</small><strong>{overdue}</strong><p>Requieren gestión</p></div>
-        </article>
-      </section>
+        <article className="courseAlert">
+          <div className="courseAlertHead">
+            <div><p className="eyebrow">ALERTA DE ENTREGA</p><h2>Provisiones en curso</h2></div>
+            <span>{inCourse.length} {inCourse.length === 1 ? "entrega pendiente" : "entregas pendientes"}</span>
+          </div>
+          <div className="courseAlertTable" role="table" aria-label="Provisiones en curso">
+            <div className="courseAlertLabels" role="row">
+              <span>Fecha tope</span><span>Provisión</span><span>Cantidad</span><span>Lugar de despacho</span><span>Alerta</span>
+            </div>
+            {inCourse.map(item => {
+              const alert = urgency(item.days);
+              return <div className="courseAlertRow" role="row" key={item.id}>
+                <span data-label="Fecha tope">{item.dueDate ? new Date(item.dueDate).toLocaleDateString("es-CL") : "Sin fecha"}</span>
+                <strong data-label="Provisión">{displayText(item.provision)}</strong>
+                <span data-label="Cantidad">{formatNumber.format(item.quantity)} {item.unit}</span>
+                <span data-label="Lugar de despacho">{item.observations || "Sin destino informado"}</span>
+                <b className={`deliveryAlert ${alert.className}`} data-label="Alerta">{alert.label}</b>
+              </div>;
+            })}
+            {!inCourse.length && <p className="empty">No hay provisiones en curso para este año.</p>}
+          </div>
+        </article>      </section>
 
       <section className="workspace">
         <article className="progressPanel">
