@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-30T13:46:51.447Z",
+  "generatedAt": "2026-08-06T15:18:13.651Z",
   "base": [
     {
       "id": "BT-001",
@@ -566,6 +566,21 @@
       "manifoldMonth": "Julio",
       "bookSheet": "12",
       "serviceOrder": "4"
+    },
+    {
+      "id": "PROV-0027",
+      "contractYear": 2026,
+      "requestDate": "2026-08-04",
+      "dueDate": "2026-08-21",
+      "provision": "Solerilla",
+      "category": "Solerilla",
+      "quantity": 200,
+      "unit": "unidad",
+      "status": "Pendiente",
+      "observations": "Entrega vivero Municipal",
+      "manifoldMonth": "",
+      "bookSheet": "",
+      "serviceOrder": ""
     }
   ]
 }
